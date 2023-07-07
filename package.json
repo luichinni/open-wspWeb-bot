@@ -1,0 +1,16 @@
+{
+  "name": "wsp_bot",
+  "version": "1.0.0",
+  "description": "bot para grupos de wsp",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "node index.js"
+  },
+  "author": "luciano",
+  "license": "ISC",
+  "dependencies": {
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "^1.21.0"
+  }
+}
