@@ -28,11 +28,11 @@ Hechos estos pasos el bot está listo para usarse.
 El simbolo para efectuar los comandos puede ser modificado desde el código en la constante "cmdSimbolo"
 | Comando | Descripcion |
 | --- | --- |
-|info| Muestra los comandos disponibles segun usuario o admin corresponda, los comandos son tomados directamente de la carpeta comandos.|
-|grupos buscar \<texto>| Busca en la bd grupos cuyo nombre contenga el texto pasado por comando y muestra los codigos de dichos grupos.|
-|grupos invitar \<codigo>| Intenta agregar al usuario al grupo cuyo codigo fue pasado por comando, si el usuario no puede ser agregado, se le envia la invitacion por privado.|
-|(admin) agregar| Al ser usado en un grupo donde se sea admin, este se agrega a la base de datos dandole un código hasheado para ser localizado por grupos buscar|
-|(admin) eliminar| Al ser usado en un grupo donde se sea admin, si el grupo existe en la bd, es eliminado.|
+|!info| Muestra los comandos disponibles segun usuario o admin corresponda, los comandos son tomados directamente de la carpeta comandos.|
+|!grupos buscar \<texto>| Busca en la bd grupos cuyo nombre contenga el texto pasado por comando y muestra los codigos de dichos grupos.|
+|!grupos invitar \<codigo>| Intenta agregar al usuario al grupo cuyo codigo fue pasado por comando, si el usuario no puede ser agregado, se le envia la invitacion por privado.|
+|(admin) !agregar| Al ser usado en un grupo donde se sea admin, este se agrega a la base de datos dandole un código hasheado para ser localizado por grupos buscar|
+|(admin) !eliminar| Al ser usado en un grupo donde se sea admin, si el grupo existe en la bd, es eliminado.|
 
 ## Creacion de comandos nuevos
 Para crear un comando se debe generar un archivo .js en la carpeta ./comandos/ siendo la sintaxis la siguiente:
