@@ -25,6 +25,7 @@ Una vez escaneado esperamos que carguen los chats (barra de carga integrada para
 Hechos estos pasos el bot está listo para usarse.
 
 # Comandos
+El simbolo para efectuar los comandos puede ser modificado desde el código en la constante "cmdSimbolo"
 | Comando | Descripcion |
 | --- | --- |
 |info| Muestra los comandos disponibles segun usuario o admin corresponda, los comandos son tomados directamente de la carpeta comandos.|
