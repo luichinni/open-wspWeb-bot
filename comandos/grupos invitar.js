@@ -1,9 +1,45 @@
 module.exports = {
     comando: 'grupos invitar', // nombre del comando
-    info: '-> invita al grupo correspondiente al codigo' // informacion del comando
+    params: '<codigo>', // parametros del comando
+    visible: true, // visible al usuario
+    info: 'agrega al usuario al grupo solicitado por medio del <codigo> ingresado, se obtiene del comando grupos buscar' // informacion del comando
 }
-module.exports.ejecutar = function (msg) { // funcion del comando, siempre recibe msg
-    /*client.getChats().then((chats) => {
-        chats.every(chat => chat.name.includes('mate'));           
-    });*/
+module.exports.ejecutar = function (msg, db, campos, client, contacto) { // funcion del comando, siempre recibe msg
+    var grup = msg.body.split(' ')[2].toLowerCase(); // tomamos el codigo hash
+    let sql = `SELECT ${campos[3]} FROM ${campos[0]} WHERE ${campos[1]} = '${grup}'`; // medio hardcodeado jasj
+    db.get(sql, [], (err, grupo) => {
+        if (err) console.log(err);
+        if (grupo !== undefined) {
+            client.getChatById(grupo.invitacion)
+            .then(async (chat) => {
+                //console.log(contacto);
+                var existe = false;
+                chat.participants.forEach(p => {
+                    if(p.id._serialized === contacto.id._serialized){
+                        existe = true;
+                    }
+                });
+                if(!existe){
+                    chat.addParticipants([contacto.id._serialized]);
+                    existe = false;
+                    chat.participants.forEach(p => {
+                        if (p.id._serialized === contacto.id._serialized) {
+                            existe = true;
+                        }
+                    });
+                    if(!existe){
+                        var c = await contacto.getChat();
+                        await c.sendMessage('https://chat.whatsapp.com/' +await chat.getInviteCode());
+                        setTimeout(()=>{},3000);
+                        msg.react('💭');
+                    }else{
+                        msg.react('🫰🏽');
+                    }
+                }
+            });
+        } else {
+            msg.reply('No hay grupos que coincidan, intenta otro codigo!!');
+        }
+    });
+    db.close();
 }
