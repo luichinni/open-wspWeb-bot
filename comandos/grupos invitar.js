@@ -11,7 +11,7 @@ module.exports.ejecutar = function (msg, db, campos, client, contacto) { // func
         if (err) console.log(err);
         if (grupo !== undefined) {
             client.getChatById(grupo.invitacion)
-            .then(async (chat) => {
+            .then((chat) => {
                 //console.log(contacto);
                 var existe = false;
                 chat.participants.forEach(p => {
@@ -19,24 +19,28 @@ module.exports.ejecutar = function (msg, db, campos, client, contacto) { // func
                         existe = true;
                     }
                 });
-                if(!existe){
+                if (!existe) {
                     chat.addParticipants([contacto.id._serialized]);
-                    existe = false;
-                    chat.participants.forEach(p => {
+                }
+            });
+            setTimeout(() => { // el timeout a 5 segundo para darle tiempo a actualizar la lista de participantes
+                client.getChatById(grupo.invitacion).then(async (gp) => {
+                    var existe = false;
+                    gp.participants.forEach(p => {
                         if (p.id._serialized === contacto.id._serialized) {
                             existe = true;
                         }
                     });
-                    if(!existe){
+                    if (!existe) {
                         var c = await contacto.getChat();
-                        await c.sendMessage('https://chat.whatsapp.com/' +await chat.getInviteCode());
-                        setTimeout(()=>{},3000);
+                        await c.sendMessage('https://chat.whatsapp.com/' + await gp.getInviteCode());
+                        setTimeout(() => { }, 3000);
                         msg.react('💭');
-                    }else{
+                    } else {
                         msg.react('🫰🏽');
                     }
-                }
-            });
+                });
+            },5000); 
         } else {
             msg.reply('No hay grupos que coincidan, intenta otro codigo!!');
         }
