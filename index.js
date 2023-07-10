@@ -6,7 +6,7 @@ const crearTabla = require('./utilidades/crearTabla.js');
 const sqlite3 = require('sqlite3');
 const WAWebJS = require("whatsapp-web.js");
 
-const cmdSimbolo = '.'; // modificar para tener un identificador diferente
+const cmdSimbolo = '!'; // modificar para tener un identificador diferente
 
 // creamos la tabla si no existe
 const pathDB = 'grupos.sqlite';
