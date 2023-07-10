@@ -5,8 +5,9 @@ const fs = require('fs');
 const crearTabla = require('./utilidades/crearTabla.js');
 const sqlite3 = require('sqlite3');
 const WAWebJS = require("whatsapp-web.js");
+const cliProgress = require('cli-progress');
 
-const cmdSimbolo = '!'; // modificar para tener un identificador diferente
+const cmdSimbolo = '.'; // modificar para tener un identificador diferente
 
 // creamos la tabla si no existe
 const pathDB = 'grupos.sqlite';
@@ -22,20 +23,21 @@ const client = new Client({
 })
 
 client.on('qr', qr => {
+    console.clear();
+    console.log('Escanea el qr para poder ingresar');
     qrcode.generate(qr, { small: true });
 });
-var iniciado = false;
+
+let bar1 = undefined;
 client.on('loading_screen',(perc,msg)=>{
-    if(iniciado){
-        process.stdout.moveCursor(0, -2);
-        process.stdout.clearLine();
+    if(bar1 === undefined){
+        console.clear();
+        console.log('Cargando chats...');
+        bar1 = new cliProgress.SingleBar({ clearOnComplete: false, hideCursor: true, format: '\u001b[32m{bar}\u001b[37m | {percentage}%' }, cliProgress.Presets.shades_classic)
+        bar1.start(100, perc);
     }else{
-        iniciado=true;
+        bar1.update(parseInt(perc));
     }
-    console.log(msg);
-    var rects = new Array((parseInt(parseInt(perc) * 25) / 100)).join('█');
-    var barra = rects + new Array(25 - rects.length).join('░');
-    console.log('\u001b[32m' + barra +'\u001b[37m'+' | '+perc+'%');
 });
 
 client.on("ready", () => {
