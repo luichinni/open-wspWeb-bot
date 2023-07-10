@@ -20,7 +20,8 @@ Aparecerá un qr que debemos escanear para poder darle acceso al whatsapp que qu
 
 Una vez escaneado esperamos que carguen los chats (barra de carga integrada para conocer el porcentaje de carga) y a recibir el mensaje "Bot Activo!"
 
-![image](https://github.com/luichinni/open-wspWeb-bot/assets/98102676/3a76a3cf-3dc8-4598-b632-e9a7022ac640)
+![image](https://github.com/luichinni/open-wspWeb-bot/assets/98102676/186d69e0-44c1-48ea-9fa0-b52092c634c7)
+![image](https://github.com/luichinni/open-wspWeb-bot/assets/98102676/5d7a586f-e12a-49b8-93c7-b2b602f01158)
 
 Hechos estos pasos el bot está listo para usarse.
 
